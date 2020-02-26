@@ -7,8 +7,8 @@ const form = () => {
       <h1>We Are Anonymous</h1>
 =======
       <h1>just testing it out</h1>
-      <h1>just testing it out - Shane</h1>
-	  <h1>Thomas check 2<h1>
+      <h2>just testing it out - Shane</h2>
+	  <h3>Thomas check 2</h3>
 
 >>>>>>> f6d427bb16c54c9f20aadbd5eb20ce0fda374703
     </div>
