@@ -14,14 +14,12 @@ class Main extends Component {
         length: 0,
         rating: 0,
         comment: '',
-        books: []
+        books: [],
+        username: 'chance'
     }
 
     componentDidMount() {
-        axios.get('https://books-n-more.firebaseio.com/chance.json').then(response => {
-            const books = Object.keys(response.data).map(keyName => response.data[keyName]);
-            this.setState({books: books});
-            });
+        this.updateBookList();
     }
 
     entryHandler = param => event => {
@@ -39,14 +37,20 @@ class Main extends Component {
             rating: this.state.rating,
             comment: this.state.comment
         }
-        axios.post('https://books-n-more.firebaseio.com/chance.json', post).then(response => {
-            console.log(response);
-        });
+        axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
+    }
+
+    updateBookList = () => {
+        axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
+            const books = Object.keys(response.data).map(keyName => response.data[keyName]);
+            this.setState({books: books});
+            this.renderBookList();
+            });
     }
 
     renderBookList = () => {
         const bookList = this.state.books.map((book) =>
-            <li><Row title={book.name} author={book.author} key={book.name}/></li>
+            <li><Row title={book.name} author={book.author} key={book.name + book.author}/></li>
         );
         return (
             <ul>{bookList}</ul>
@@ -57,7 +61,8 @@ class Main extends Component {
         return(
             <div>
                 <Form changeHandler={this.entryHandler}/>
-                <Button add={this.submitBook}/>
+                <Button add={this.submitBook}>Add Book</Button>
+                <Button add={this.updateBookList}>Get New Books</Button>
                 {this.renderBookList()}
             </div>
         );
