@@ -39,7 +39,8 @@ class Main extends Component {
         }
         axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
     }
-    //delete
+    //delete selected book
+    //first figure out how to select a book
     deleteBook = () => {
 
     }
