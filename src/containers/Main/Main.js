@@ -39,6 +39,10 @@ class Main extends Component {
         }
         axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
     }
+    //delete
+    deleteBook = () => {
+
+    }
 
     updateBookList = () => {
         axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
@@ -57,12 +61,14 @@ class Main extends Component {
         );
     }
 
+
     render() {
         return(
             <div>
                 <Form changeHandler={this.entryHandler}/>
                 <Button add={this.submitBook}>Add Book</Button>
                 <Button add={this.updateBookList}>Get New Books</Button>
+                <Button add={this.deleteBook}>Delete Book</Button>
                 {this.renderBookList()}
             </div>
         );
