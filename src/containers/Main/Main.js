@@ -5,6 +5,7 @@ import Form from '../../components/Form/Form';
 import Button from '../../components/Button/Button';
 import Row from '../../components/Row/Row';
 
+
 class Main extends Component {
 
     state = {
@@ -28,7 +29,7 @@ class Main extends Component {
         });
     }
 
-    submitBook = () => {
+    submitBook = async () => {
         const post = {
             name: this.state.name,
             author: this.state.author,
@@ -37,12 +38,13 @@ class Main extends Component {
             rating: this.state.rating,
             comment: this.state.comment
         }
-        axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
+        await axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
+        this.updateBookList();
     }
-    //delete selected book
-    //first figure out how to select a book
+    
     deleteBook = () => {
-
+        //delete selected book
+        //first figure out how to select a book
     }
 
     updateBookList = () => {
