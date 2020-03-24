@@ -4,6 +4,7 @@ import axios from 'axios';
 import Form from '../../components/Form/Form';
 import Button from '../../components/Button/Button';
 import Row from '../../components/Row/Row';
+import Statistics from '../../components/Statistics/Statistics';
 
 
 class Main extends Component {
@@ -73,6 +74,7 @@ class Main extends Component {
                 <Button add={this.updateBookList}>Get New Books</Button>
                 <Button add={this.deleteBook}>Delete Book</Button>
                 {this.renderBookList()}
+                <Statistics username={this.state.username}/>
             </div>
         );
     }
