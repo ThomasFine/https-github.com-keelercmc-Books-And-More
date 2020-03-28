@@ -18,7 +18,7 @@ class Main extends Component {
         rating: 0,
         comment: '',
         books: [],
-        username: 'chance'
+        username: ''
     }
 
     componentDidMount() {
@@ -43,7 +43,7 @@ class Main extends Component {
         await axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
         this.updateBookList();
     }
-    
+
     deleteBook = () => {
         //delete selected book
         //first figure out how to select a book
