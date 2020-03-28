@@ -80,6 +80,7 @@ class Main extends Component {
         );
     }
 }
-
-<li><a href="/ContactUs/contact.html">Contact Us</a></li>
+<body>
+  <li><a href="/ContactUs/contact.html">Contact Us</a></li>
+</body>
 export default Main;
