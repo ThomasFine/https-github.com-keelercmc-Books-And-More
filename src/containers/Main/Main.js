@@ -18,7 +18,7 @@ class Main extends Component {
         rating: 0,
         comment: '',
         books: [],
-        username: username
+        username: 'shane'
     }
 
     componentDidMount() {
