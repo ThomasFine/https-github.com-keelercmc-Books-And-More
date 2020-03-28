@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Form from '../../components/Form/Form';
+import Checkbox from '../../components/Checkbox/Checkbox';
 import Button from '../../components/Button/Button';
 import Row from '../../components/Row/Row';
 import Statistics from '../../components/Statistics/Statistics';
