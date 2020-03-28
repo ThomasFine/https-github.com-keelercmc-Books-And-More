@@ -18,7 +18,7 @@ class Statistics extends Component {
 
     totalBooks = () => {
         //Total books read: Sum of entries
-        axios.get('https://books-n-more.firebaseio.com/' + username + '.json').then(response => {
+        axios.get('https://books-n-more.firebaseio.com/' + 'shane' + '.json').then(response => {
             this.setState({totalBooks: Object.keys(response.data).length});
         });
     }
@@ -32,7 +32,6 @@ class Statistics extends Component {
         return(
             <div>
                 <hi>Total books read for {this.state.username}: {this.state.totalBooks}</hi>
-                <h1>test </h1>
             </div>
         );
     }
