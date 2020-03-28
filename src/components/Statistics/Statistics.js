@@ -32,6 +32,7 @@ class Statistics extends Component {
         return(
             <div>
                 <hi>Total books read for {this.state.username}: {this.state.totalBooks}</hi>
+                <hi>test <hi>
             </div>
         );
     }
