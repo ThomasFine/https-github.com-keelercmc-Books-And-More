@@ -3,14 +3,14 @@
   font-family: 'Open Sans';
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
-  --bg-primary: #FA6F25;
+  --bg-primary: ##23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
 }
 
 body {
   color: black;
-  background-color: white;
+  background-color: #FA6F25;
   margin: 0;
   padding: 0;
 }
