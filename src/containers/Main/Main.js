@@ -65,9 +65,9 @@ class Main extends Component {
     renderBookList = () => {
         
         const divStyle = {
-            margin: '0px',
-            margin-left: '5rem',
-            padding: '1rem',
+            
+            margin-left: '40px',
+            padding: '5px',
             border: '2px solid black',
             fontSize: '10px',
             textAlign: 'left'
