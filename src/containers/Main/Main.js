@@ -57,9 +57,17 @@ class Main extends Component {
             });
     }
 
+    
+    
+    const divStyle = {
+        margin: '40px',
+        border: '5px solid black'
+    };
+    
+    
     renderBookList = () => {
         const bookList = this.state.books.map((book) =>
-            <li><Row title={book.name} author={book.author} key={book.name + book.author}/></li>
+            <div style={divStyle}><li><Row title={book.name} author={book.author} key={book.name + book.author}/></li></div>
         );
         return (
             <ul>{bookList}</ul>
