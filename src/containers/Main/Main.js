@@ -5,7 +5,7 @@ import Form from '../../components/Form/Form';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Button from '../../components/Button/Button';
 import Row from '../../components/Row/Row';
-import Statistics from '../../components/Statistics/Statistics';
+import Statistics from '../Statistics/Statistics';
 
 
 class Main extends Component {
@@ -18,7 +18,7 @@ class Main extends Component {
         rating: 0,
         comment: '',
         books: [],
-        username: 'Shane'
+        username: 'chance'
     }
 
     componentDidMount() {
