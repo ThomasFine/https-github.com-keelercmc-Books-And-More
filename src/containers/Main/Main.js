@@ -61,7 +61,9 @@ class Main extends Component {
     
     const divStyle = {
         margin: '40px',
-        border: '5px solid black'
+        border: '5px solid black',
+        fontSize: '15px',
+        textAlign: 'left'
     };
     
     
