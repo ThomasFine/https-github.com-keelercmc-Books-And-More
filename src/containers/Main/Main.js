@@ -65,14 +65,14 @@ class Main extends Component {
     renderBookList = () => {
         
         const divStyle = {
-            margin: '40px',
+            margin: '1px',
             border: '5px solid pink',
             fontSize: '25px',
             textAlign: 'left'
         };
         
         const bookList = this.state.books.map((book) =>
-            <div style={divStyle}><li><Row title={book.name} author={book.author} key={book.name + book.author}/></li></div>
+            <div style={divStyle}><tr><td><Row title={book.name}</td> <td>author={book.author}</td> key={book.name + book.author}/></tr></div>
         );
         return (
             <ul>{bookList}</ul>
