@@ -72,7 +72,7 @@ class Main extends Component {
         };
         
         const bookList = this.state.books.map((book) =>
-            <div style={divStyle}><tr><td><Row title={book.name}</td> <td>author={book.author}</td> key={book.name + book.author}/></tr></div>
+            <div style={divStyle}><li><Row title={book.name} author={book.author} key={book.name + book.author}/></li></div>
         );
         return (
             <ul>{bookList}</ul>
