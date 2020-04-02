@@ -8,42 +8,43 @@ class Statistics extends Component {
         super(props);
         this.state = {
             username: props.username,
-            totalBooks: 0,
-            totalPages: 0,
-            totalRating: 0
+            stats: {
+                totalBooks: 0,
+                totalPages: 0,
+                totalRating: 0
+            }
         };
       }
 
     componentDidMount() {
-        this.stats();
+        this.getStats();
     }
 
-    stats = () => {
-        //Total books read: Sum of entries
-        //Total pages read: Sum of entry lengths
-        //Average page count: Sum of entry lengths / sum of entries
-        //Average rating: Sum of entry ratings / number of entries
+    getStats = () => {
+        let stats = {
+            totalBooks: 0,
+            totalPages: 0,
+            totalRating: 0
+        };
+
         axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
-            this.setState({totalBooks: Object.keys(response.data).length})
             Object.keys(response.data).map(keyName => {
-                this.setState({totalPages: this.state.totalPages + Number(response.data[keyName].length)});
-                this.setState({totalRating: this.state.totalRating + Number(response.data[keyName].rating)});
+                stats.totalBooks = Object.keys(response.data).length;
+                stats.totalPages += Number(response.data[keyName].length);
+                stats.totalRating += Number(response.data[keyName].rating);
             });
         });
+        this.setState({stats: stats});
     }
- 
-    
-    //Favorite author: Form array of authors, sort, return most repeated author
-    //Median year: Form array of years, sort, return middle element
 
     render() {
         return(
             <div>
                 <h1>Overview for {this.state.username}:</h1>
-                <h1>Total books read: {this.state.totalBooks}</h1>
-                <h1>Total pages read: {this.state.totalPages}</h1>
-                <h1>Average page count: {Math.floor(this.state.totalPages / this.state.totalBooks)}</h1>
-                <h1>Average rating: {(this.state.totalRating / this.state.totalBooks).toFixed(1)}</h1>
+                <h1>Total books read: {this.state.stats.totalBooks}</h1>
+                <h1>Total pages read: {this.state.stats.totalPages}</h1>
+                <h1>Average page count: {Math.floor(this.state.stats.totalPages / this.state.stats.totalBooks)}</h1>
+                <h1>Average rating: {(this.state.stats.totalRating / this.state.stats.totalBooks).toFixed(1)}</h1>
             </div>
         );
     }
