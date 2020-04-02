@@ -4,7 +4,7 @@ import axios from 'axios';
 import Form from '../../components/Form/Form';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import Row from '../../components/Row/Row';
-import Statistics from '../Statistics/Statistics';
+import Statistics from '../../components/Statistics/Statistics';
 
 import Button from 'react-bootstrap/Button';
 
@@ -12,15 +12,15 @@ import Button from 'react-bootstrap/Button';
 class Main extends Component {
 
     state = {
+        username: 'chance',
         name: '',
         author: '',
         year: 0,
         length: 0,
         rating: 0,
         comment: '',
-        keys: 0,
         books: [],
-        username: 'chance',
+        keys: [],
         stats: {
             totalBooks: 0,
             totalPages: 0,
@@ -47,15 +47,15 @@ class Main extends Component {
             length: this.state.length,
             rating: this.state.rating,
             comment: this.state.comment,
-            key: this.state.key
+            index: null
         }
         await axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
         this.updateBookList();
     }
 
-    deleteBook = (p) => {
-        console.log(this.state.keys);
-        //axios.delete('https://books-n-more.firebaseio.com/' + this.state.username + '.json');
+    deleteBook = async (index) => {
+        await axios.delete('https://books-n-more.firebaseio.com/' + this.state.username + '/' + this.state.keys[index-1] + '.json')
+        this.updateBookList();
     }
 
     updateBookList = () => {
@@ -66,16 +66,19 @@ class Main extends Component {
             totalRating: 0
         };
 
-        let counter = 0;
+        let counter = 0
 
         axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
             const books = Object.keys(response.data).map(keyName => response.data[keyName]);
-            const keys = Object.keys(response.data).map(key => response.data + ++counter);
             stats.totalBooks = Object.keys(response.data).length;
+            const keys = Object.keys(response.data);
             Object.keys(response.data).forEach(keyName => {
                 stats.totalPages += Number(response.data[keyName].length);
                 stats.totalRating += Number(response.data[keyName].rating);
             });
+            books.forEach(book => {
+                book.index = ++counter
+            })
             this.setState({books: books, stats: stats, keys: keys});
             this.renderBookList();
         });
@@ -92,11 +95,10 @@ class Main extends Component {
             fontSize: '12px',
             textAlign: 'left'
         };
-
         const bookList = this.state.books.map((book) =>
             <div style={divStyle}>
-                <li><Row title={book.name} author={book.author}/></li>
-                <Button variant="danger" onClick={() => this.deleteBook(book)}>x</Button>
+                <li>{book.index}<Row title={book.name} author={book.author}/></li>
+                <Button variant="danger" onClick={() => this.deleteBook(book.index)}>x</Button>
                 </div>
         );
         return (
