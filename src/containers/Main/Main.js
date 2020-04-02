@@ -17,8 +17,15 @@ class Main extends Component {
         length: 0,
         rating: 0,
         comment: '',
+        keys: 0,
         books: [],
-        username: 'chance'
+        username: 'chance',
+        stats: {
+            totalBooks: 0,
+            totalPages: 0,
+            totalRating: 0
+        },
+        showStats: false
     }
 
     componentDidMount() {
@@ -38,23 +45,39 @@ class Main extends Component {
             year: this.state.year,
             length: this.state.length,
             rating: this.state.rating,
-            comment: this.state.comment
+            comment: this.state.comment,
+            key: this.state.key
         }
         await axios.post('https://books-n-more.firebaseio.com/' + this.state.username + '.json', post);
         this.updateBookList();
     }
 
-    deleteBook = () => {
-        //delete selected book
-        //first figure out how to select a book
+    deleteBook = (p) => {
+        console.log(this.state.keys);
+        //axios.delete('https://books-n-more.firebaseio.com/' + this.state.username + '.json');
     }
 
     updateBookList = () => {
+
+        let stats = {
+            totalBooks: 0,
+            totalPages: 0,
+            totalRating: 0
+        };
+
+        let counter = 0;
+
         axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
             const books = Object.keys(response.data).map(keyName => response.data[keyName]);
-            this.setState({books: books});
-            this.renderBookList();
+            const keys = Object.keys(response.data).map(key => response.data + ++counter);
+            stats.totalBooks = Object.keys(response.data).length;
+            Object.keys(response.data).forEach(keyName => {
+                stats.totalPages += Number(response.data[keyName].length);
+                stats.totalRating += Number(response.data[keyName].rating);
             });
+            this.setState({books: books, stats: stats, keys: keys});
+            this.renderBookList();
+        });
     }
     
     renderBookList = () => {
@@ -70,13 +93,23 @@ class Main extends Component {
         };
 
         const bookList = this.state.books.map((book) =>
-            <div style={divStyle}><li><Row title={book.name} author={book.author} key={book.name + book.author}/></li></div>
+            <div style={divStyle}>
+                <li><Row title={book.name} author={book.author}/></li>
+                <button onClick={() => this.deleteBook(book)}>x</button>
+                </div>
         );
         return (
             <ul>{bookList}</ul>
         );
     }
 
+    enableStats = () => {
+        this.setState({showStats: !this.state.showStats});
+    }
+
+    displayStats = () => {
+        return <Statistics username={this.state.username} stats={this.state.stats}/>
+    }
 
     render() {
         return(
@@ -86,7 +119,8 @@ class Main extends Component {
                 <Button add={this.updateBookList}>Get New Books</Button>
                 <Button add={this.deleteBook}>Delete Book</Button>
                 {this.renderBookList()}
-                <Statistics username={this.state.username}/>
+                <Button add={this.enableStats}>Show Statistics</Button>
+                {this.state.showStats ? this.displayStats() : null}    
             </div>
         );
     }

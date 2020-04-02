@@ -4,42 +4,17 @@ import axios from 'axios';
 
 class Statistics extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: props.username,
-            stats: {
-                totalBooks: 0,
-                totalPages: 0,
-                totalRating: 0
-            }
-        };
-      }
-
-    componentDidMount() {
-        this.getStats();
+    state = {
+        username: this.props.username,
+        stats: this.props.stats
     }
 
-    getStats = () => {
-        let stats = {
-            totalBooks: 0,
-            totalPages: 0,
-            totalRating: 0
-        };
-
-        axios.get('https://books-n-more.firebaseio.com/' + this.state.username + '.json').then(response => {
-            Object.keys(response.data).map(keyName => {
-                stats.totalBooks = Object.keys(response.data).length;
-                stats.totalPages += Number(response.data[keyName].length);
-                stats.totalRating += Number(response.data[keyName].rating);
-            });
-        });
-        this.setState({stats: stats});
-    }
+    log = () => console.log(this.state.stats);
 
     render() {
         return(
             <div>
+                {this.log()}
                 <h1>Overview for {this.state.username}:</h1>
                 <h1>Total books read: {this.state.stats.totalBooks}</h1>
                 <h1>Total pages read: {this.state.stats.totalPages}</h1>
