@@ -3,9 +3,10 @@ import axios from 'axios';
 
 import Form from '../../components/Form/Form';
 import Checkbox from '../../components/Checkbox/Checkbox';
-import Button from '../../components/Button/Button';
 import Row from '../../components/Row/Row';
 import Statistics from '../Statistics/Statistics';
+
+import Button from 'react-bootstrap/Button';
 
 
 class Main extends Component {
@@ -95,7 +96,7 @@ class Main extends Component {
         const bookList = this.state.books.map((book) =>
             <div style={divStyle}>
                 <li><Row title={book.name} author={book.author}/></li>
-                <button onClick={() => this.deleteBook(book)}>x</button>
+                <Button variant="danger" onClick={() => this.deleteBook(book)}>x</Button>
                 </div>
         );
         return (
@@ -115,11 +116,10 @@ class Main extends Component {
         return(
             <div>
                 <Form changeHandler={this.entryHandler}/>
-                <Button add={this.submitBook}>Add Book</Button>
-                <Button add={this.updateBookList}>Get New Books</Button>
-                <Button add={this.deleteBook}>Delete Book</Button>
+                <Button variant="light" onClick={this.submitBook}>Add Book</Button>
+                <Button variant="light"onClick={this.updateBookList}>Fetch Books</Button>
                 {this.renderBookList()}
-                <Button add={this.enableStats}>Show Statistics</Button>
+                <Button variant="dark" onClick={this.enableStats}>Show Statistics</Button>
                 {this.state.showStats ? this.displayStats() : null}    
             </div>
         );
