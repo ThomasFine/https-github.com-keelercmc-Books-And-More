@@ -1,6 +1,4 @@
 <!-- This is reserved for the Contact Us page, a form for name, email, phone, and concern  - SM-->
-<!DOCTYPE html>
-<html>
 
 <head>
   <title>Contact</title>
