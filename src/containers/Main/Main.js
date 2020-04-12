@@ -118,7 +118,7 @@ class Main extends Component {
         return(
             <div>
                 <Form changeHandler={this.entryHandler}/>
-                <Button variant="light" img src="addbook.png" alt="my image" onClick={this.submitBook}></Button>
+                <Button variant="light" onClick={this.submitBook}>Add Book</Button>
                 <Button variant="light"onClick={this.updateBookList}>Fetch Books</Button>
                 {this.renderBookList()}
                 <Button variant="dark" onClick={this.enableStats}>Show Statistics</Button>
