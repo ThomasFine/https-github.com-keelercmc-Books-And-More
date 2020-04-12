@@ -93,7 +93,8 @@ class Main extends Component {
             padding: '5px',
             border: '2px solid black',
             fontSize: '12px',
-            textAlign: 'left'
+            textAlign: 'left',
+            body: background-color: 'light gray'
         };
         const bookList = this.state.books.map((book) =>
             <div style={divStyle}>
