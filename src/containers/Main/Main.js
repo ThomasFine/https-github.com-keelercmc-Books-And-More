@@ -91,7 +91,7 @@ class Main extends Component {
             marginLeft: '80px',
             marginRight: '80px',
             padding: '5px',
-            border: '2px solid black',
+            border: '2px solid white',
             fontSize: '12px',
             textAlign: 'left',
             background-color: 'gray'
